@@ -438,21 +438,21 @@ public class InputMap implements Printable {
                     }
                     Call.funBegin(null,NOLINENUMBER);
                     if(type.equals("int")){
-                        field1.setInt(ret,((Integer)myInput(Globals.INT, null)).intValue());
+                        field1.setInt(ret,((Integer)myInputWithoutAssignTo(Globals.INT, null)).intValue());
                     } else if(type.equals("short")){
-                        field1.setShort(ret,((Short)myInput(Globals.SHORT, null)).shortValue());
+                        field1.setShort(ret,((Short)myInputWithoutAssignTo(Globals.SHORT, null)).shortValue());
                     } else if(type.equals("byte")) {
-                        field1.setByte(ret,((Byte)myInput(Globals.BYTE, null)).byteValue());
+                        field1.setByte(ret,((Byte)myInputWithoutAssignTo(Globals.BYTE, null)).byteValue());
                     } else if(type.equals("char")) {
-                        field1.setChar(ret,((Character)myInput(Globals.CHAR, null)).charValue());
+                        field1.setChar(ret,((Character)myInputWithoutAssignTo(Globals.CHAR, null)).charValue());
                     } else if(type.equals("long")){
-                        field1.setLong(ret,((Long)myInput(Globals.LONG, null)).longValue());
+                        field1.setLong(ret,((Long)myInputWithoutAssignTo(Globals.LONG, null)).longValue());
                     } else if(type.equals("boolean")){
-                        field1.setBoolean(ret,((Boolean)myInput(Globals.BOOLEAN, null)).booleanValue());
+                        field1.setBoolean(ret,((Boolean)myInputWithoutAssignTo(Globals.BOOLEAN, null)).booleanValue());
                     } else if(type.equals("float")){
-                        field1.setFloat(ret,((Float)myInput(Globals.FLOAT, null)).floatValue());
+                        field1.setFloat(ret,((Float)myInputWithoutAssignTo(Globals.FLOAT, null)).floatValue());
                     } else if(type.equals("double")){
-                        field1.setDouble(ret,((Double)myInput(Globals.DOUBLE, null)).doubleValue());
+                        field1.setDouble(ret,((Double)myInputWithoutAssignTo(Globals.DOUBLE, null)).doubleValue());
                     } else if(type.startsWith("class")){
                         junitTest.assignTo(varName,field1.getName(),type.substring(6));
                         field1.set(ret,input(field1.getType(),tab+1,recursive));
@@ -556,9 +556,6 @@ public class InputMap implements Printable {
 
 
     Object myInput(int type, Object o){
-        Object ret;
-        InputElement val;
-
         switch(type){
             case Globals.INT:
                 junitTest.assignToInput("Integer");
@@ -585,6 +582,13 @@ public class InputMap implements Printable {
                 junitTest.assignToInput("Boolean");
                 break;
         }
+        return myInputWithoutAssignTo(type, o);
+    }
+
+    private Object myInputWithoutAssignTo(int type, Object o) {
+        Object ret;
+        InputElement val;
+
         if((information.debugLevel&1)!=0) logger.info(1,"myInput Begin",null);
         if(isInputAvailable(type)){
             val = getInput();
