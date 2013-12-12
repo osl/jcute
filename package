@@ -1,0 +1,47 @@
+export CUTE=jcute
+sh ./package_application
+mkdir tmp
+mkdir tmp/$CUTE
+cp $CUTE.htm tmp/$CUTE/demo.htm
+cp $CUTE.swf tmp/$CUTE/
+cp jcutec.in tmp/$CUTE/
+cp replay tmp/$CUTE
+cp LICENSE.* tmp/$CUTE/
+cp jcute.in tmp/$CUTE/
+cp jcuteonce.in tmp/$CUTE/
+cp jcutegui.bat tmp/$CUTE/
+cp jcutegui tmp/$CUTE/
+cp clean tmp/$CUTE/
+cp setup tmp/$CUTE/
+cp $CUTE.test tmp/$CUTE/runtests
+cp dcute.test tmp/$CUTE/dtests
+dos2unix tmp/$CUTE/*.in
+dos2unix tmp/$CUTE/jcutegui
+chmod +x tmp/$CUTE/jcutegui
+dos2unix tmp/$CUTE/setup
+chmod +x tmp/$CUTE/setup
+dos2unix tmp/$CUTE/clean
+chmod +x tmp/$CUTE/clean
+dos2unix tmp/$CUTE/$CUTE.test
+chmod +x tmp/$CUTE/$CUTE.test
+cp README.$CUTE tmp/$CUTE/README
+cp LICENSE* tmp/$CUTE/
+cp jcute.jar tmp/$CUTE/
+cp 3rdparty/lpsolve51.dll tmp/$CUTE/
+cp 3rdparty/lpsolve51j.dll tmp/$CUTE/
+cp 3rdparty/liblpsolve51.so tmp/$CUTE/
+cp 3rdparty/liblpsolve51j.so tmp/$CUTE/
+cp JCuteGuiExecLog2.java tmp/$CUTE/
+cp JCuteGuiExecLog1.java tmp/$CUTE/
+cp replay1 tmp/$CUTE/
+cp testall tmp/$CUTE/
+cp -R src tmp/$CUTE/
+rm -rf tmp/$CUTE/src/ccl
+rm -rf tmp/$CUTE/src/cute
+rm -f tmp/$CUTE/src/*
+cd tmp/
+tar -cvf $CUTE.tar $CUTE/
+gzip $CUTE.tar
+mv $CUTE.tar.gz ..
+cd ..
+rm -rf tmp

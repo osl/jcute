@@ -1,0 +1,49 @@
+LINUX_FLAG=""
+arch=$(uname)
+if [ $arch != "Linux" ]
+then
+LINUX_FLAG=-B
+fi
+
+if which java;
+then
+    echo -n ""
+else
+    echo "setup unsuccessful.  java not found in $PATH"
+    exit
+fi
+
+if which javac;
+then
+    echo -n ""
+else
+    echo "setup unsuccessful.  javac not found in $PATH"
+    exit
+fi
+
+echo -n "#!" > jcuteonce
+echo `which bash` >> jcuteonce
+cat $LINUX_FLAG jcuteonce.in >> jcuteonce
+chmod +x jcuteonce
+
+echo -n "#!" > jcutec
+echo `which bash` >> jcutec
+cat $LINUX_FLAG jcutec.in >> jcutec
+chmod +x jcutec
+
+echo -n "#!" > jcute
+echo `which bash` >> jcute
+cat $LINUX_FLAG jcute.in >> jcute
+chmod +x jcute
+
+chmod +x jcutegui
+
+chmod +x clean
+chmod +x runtests
+
+echo "Setup Complete"
+echo "Try running ./runtests"
+echo "    or"
+echo "run ./testall"
+echo "    or"
+echo "run ./jcutegui for a Graphical Interface to jCUTE"

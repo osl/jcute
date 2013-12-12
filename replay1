@@ -1,0 +1,2 @@
+javac -classpath jcute.jar JCuteGuiExecLog1.java
+java -ea -classpath jcute.jar JCuteGuiExecLog1

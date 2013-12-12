@@ -1,0 +1,6 @@
+rm -rf tmpjcute/
+rm -f cuteNew*
+rm -f cuteOld*
+rm -f cuteBack*
+rm -f cuteCoverage
+rm -f cuteSymbolTable

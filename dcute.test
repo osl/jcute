@@ -1,0 +1,65 @@
+echo "Optimized Testing"
+./jcutec src/ src/dtests/SpinSort.java dtests.SpinSort -sequential
+./jcute dtests.SpinSort -i 7 -n 3 -p 1
+echo "7 runs"
+sleep 5
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog > output
+./jcute dtests.SpinSort -i 35 -n 4 -p 1
+echo "35 runs"
+sleep 5
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+./jcute dtests.SpinSort -i 226 -n 5 -p 1
+echo "226 runs"
+sleep 5
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+
+./jcutec src/ src/dtests/LeaderBuggy.java dtests.LeaderBuggy -sequential
+./jcute dtests.LeaderBuggy -i 5 -n 3 -p 1
+echo "Error in 5 runs"
+sleep 5
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+
+./jcutec src/ src/dtests/Leader.java dtests.Leader
+./jcute dtests.Leader -i 9 -n 3 -p 1
+echo "9 runs"
+sleep 5
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+./jcute dtests.Leader -i 22 -n 4 -p 1
+echo "22 runs"
+sleep 5
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+
+./jcutec src/ src/dtests/ShortestPath.java dtests.ShortestPath -sequential
+./jcute dtests.ShortestPath -i 338 -p 1 -n 4
+echo "338 runs"
+sleep 5
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+./jcute dtests.ShortestPath -i 562 -p 1 -n 5
+echo "562 runs"
+sleep 5
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+
+echo "Unoptimized Testing"
+./jcutec src/ src/dtests/SpinSort.java dtests.SpinSort -sequential
+./jcute dtests.SpinSort -i 100000 -a -n 3 -p 1
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+./jcute dtests.SpinSort -i 100000 -a -n 4 -p 1
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+./jcute dtests.SpinSort -i 100000 -a -n 5 -p 1
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+
+./jcutec src/ src/dtests/LeaderBuggy.java dtests.LeaderBuggy -sequential
+./jcute dtests.LeaderBuggy -i 100000 -a -n 3 -p 1
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+
+./jcutec src/ src/dtests/Leader.java dtests.Leader
+./jcute dtests.Leader -i 100000 -a -n 3 -p 1
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+./jcute dtests.Leader -i 100000 -a -n 4 -p 1
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+
+./jcutec src/ src/dtests/ShortestPath.java dtests.ShortestPath -sequential
+./jcute dtests.ShortestPath -i 100000 -a -p 1 -n 4
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output
+./jcute dtests.ShortestPath -i 100000 -a -p 1 -n 5
+java -classpath jcute.jar cute.concolic.logging.BranchCoverageLog >> output

@@ -1,0 +1,15 @@
+rm -rf tmp
+mkdir tmp
+cd tmp
+jar -xvf ../3rdparty/polyglotclasses-1.3.2.jar
+jar -xvf ../3rdparty/sootclasses-2.2.3.jar
+jar -xvf ../3rdparty/lpsolve51j.jar
+jar -xvf ../3rdparty/jasminclasses-2.2.3.jar
+jar -xvf ../3rdparty/argparser.jar
+jar -xvf ../3rdparty/qdox-1.5.jar
+jar -xvf ../3rdparty/junit.jar
+jar -xvf ../3rdparty/emma.jar
+rm -rf META-INF
+jar -cvf  ../others.jar *
+cd ..
+rm -rf tmp

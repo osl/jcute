@@ -1,0 +1,134 @@
+arch=$(uname)
+if [ $arch != "Linux" ]
+then
+    CLASSPATH="tmpjcute;jcute.jar;others.jar"
+else
+    CLASSPATH=tmpjcute:jcute.jar:others.jar
+fi
+
+echo "Testing the example provided in the jCUTE paper"
+echo ""
+./jcutec src/ src/tests/Demo.java tests.Demo -concurrent
+./jcute tests.Demo -i 4  -p 1
+echo "ERROR in 4 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing the example in the FSE 05 paper"
+echo ""
+./jcutec src/ src/tests/Struct.java tests.Struct -sequential
+./jcute tests.Struct -i 5  -p 1
+echo "Crashes in 5 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing Binary Search Tree"
+echo ""
+./jcutec src/ src/tests/BSTree.java tests.BSTree -sequential
+./jcute tests.BSTree -i 15  -p 1
+echo "Crashes in 15 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing XY"
+echo ""
+./jcutec src/ src/tests/Xy.java tests.Xy -concurrent
+./jcute tests.Xy -i 4  -p 1
+echo "4 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing Producer Consumer"
+echo ""
+./jcutec src/ src/tests/ProducerConsumerTest.java tests.ProducerConsumerTest -concurrent
+./jcute tests.ProducerConsumerTest -i 8  -p 1
+echo "8 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing CTest1"
+echo ""
+./jcutec src/ src/tests/CTest1.java tests.CTest1 -concurrent
+./jcute tests.CTest1 -i 3  -p 1
+echo "3 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing CTest2"
+echo ""
+./jcutec src/ src/tests/CTest2.java tests.CTest2 -concurrent
+./jcute tests.CTest2 -i 2  -p 1
+echo "2 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing DemoLock"
+echo ""
+./jcutec src/ src/tests/DemoLock.java tests.DemoLock -concurrent
+./jcute tests.DemoLock -i 4  -p 1
+echo "ERROR in 4 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing DemoLock2"
+echo ""
+./jcutec src/ src/tests/DemoLock2.java tests.DemoLock2 -concurrent
+./jcute tests.DemoLock2 -i 4  -p 1
+echo "ERROR in 4 runs "
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing SwitchTest"
+echo ""
+./jcutec src/ src/tests/SwitchTest.java tests.SwitchTest -sequential
+./jcute tests.SwitchTest -i 7  -p 1
+echo "7 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing Distributed Sorting"
+echo ""
+./jcutec src/ src/tests/DSort.java tests.DSort -concurrent
+./jcute tests.DSort -i 10  -p 1
+echo "Crashes in 10 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing String Buffer"
+echo ""
+./jcutec src/ src/tests/StringBuffer.java tests.StringBuffer -concurrent
+./jcute tests.StringBuffer -i 322  -p 1
+echo "Crashes in 322 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing Needham Schroeder Protocol"
+echo ""
+./jcutec src/ src/security/ns/NS.java security.ns.NS -concurrent
+./jcute security.ns.NS -i 406  -p 1
+echo "Crashes in 406 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+echo ""
+echo ""
+echo "Testing TMN Protocol"
+echo ""
+./jcutec src/ src/security/tmn/TMN.java security.tmn.TMN -concurrent
+./jcute security.tmn.TMN -i 522  -p 1
+echo "Crashes in 522 runs"
+sleep 5
+java  -classpath jcute.jar cute.concolic.logging.BranchCoverageLog
+
+

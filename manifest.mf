@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: 2.0 (Koushik Sen)
+Class-Path: .
+Main-Class: cute.Cute

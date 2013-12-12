@@ -1,0 +1,14 @@
+sh ./package_libraries
+cp others.jar jcute.jar
+rm -rf classes/
+mkdir classes/
+javac -source 1.5 -d classes/ -sourcepath src/ -encoding ISO-8859-15 $(find src/ccl -name "*.java")
+javac -classpath classes/:others.jar -source 1.5 -d classes/ -sourcepath src/cute $(find src/cute/ -name "*.java")
+rm -rf tmpc
+cp -R classes tmpc
+cd tmpc
+jar -umvf ../manifest.mf ../jcute.jar *
+cd ..
+jar -uvf jcute.jar images/
+jar -uvf jcute.jar files/
+rm -rf tmpc/

@@ -1,0 +1,34 @@
+
+export JAVA_LIB_PATH=.
+export LD_LIBRARY_PATH=.
+export PATH=$PATH:.
+
+arch=$(uname)
+if [ $arch != "Linux" ]
+then
+    CLASSPATH="tmpjcute/classes;jcute.jar"
+else
+    CLASSPATH=tmpjcute/classes:jcute.jar
+fi
+
+rm -rf tmpjcute
+mkdir tmpjcute
+mkdir tmpjcute/classes
+
+echo "javac -classpath $CLASSPATH -d tmpjcute -sourcepath $1 $2"
+javac -classpath $CLASSPATH -d tmpjcute/classes -sourcepath $1 $2
+
+if [ $4 != "-sequential" ]
+then
+    echo "java -classpath $CLASSPATH cute.instrument.CuteInstrumenter -keep-line-number -d ./tmpjcute/classes -x cute  -x lpsolve --app $3"
+    java -classpath $CLASSPATH cute.instrument.CuteInstrumenter -keep-line-number -d ./tmpjcute/classes -x cute  -x lpsolve --app $3
+else
+    echo "java -classpath $CLASSPATH -Dcute.sequential=true cute.instrument.CuteInstrumenter -keep-line-number -d ./tmpjcute/classes -x cute  -x lpsolve --app $3"
+    java -classpath $CLASSPATH -Dcute.sequential=true cute.instrument.CuteInstrumenter -keep-line-number -d ./tmpjcute/classes -x cute  -x lpsolve --app $3
+fi
+mv cuteSymbolTable tmpjcute
+
+#java -classpath others.jar de.java2html.Java2Html -srcdir $1 -targetdir ./tmpjcute
+#cp index.html tmpjcute
+
+

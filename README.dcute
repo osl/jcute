@@ -1,0 +1,122 @@
+dCUTE OVERVIEW
+--------------
+
+dCUTE implements an algorithm for automatic testing of open
+distributed programs.  Specifically, we assume that a program consists
+of a number of asynchronously executing concurrent processes or actors
+which may take data inputs and communicate using asynchronous
+messages.  Because of the large numbers of possible data inputs as
+well as the asynchrony in the execution and communication, distributed
+programs exhibit very large numbers of potential behaviors.  Our goal
+is two fold: to execute all reachable statements of a program, and to
+detect deadlock states.  Specifically, our algorithm uses simultaneous
+concrete and symbolic execution, or concolic execution, to explore all
+distinct behaviors that may result from a program's execution given
+different data inputs and schedules.  The key idea is as follows.  We
+use the symbolic execution to generate data inputs that may lead to
+alternate behaviors. At the same time, we use the concrete execution
+to determine, at runtime, the partial order of events in the program's
+execution.  This enables us to improve the efficiency of our algorithm
+by avoiding many tests which would result in equivalent behaviors.
+
+
+REQUIREMENT
+-----------
+windows 2000, XP with cygwin (or linux)
+Java 1.4 from http://java.sun.com/
+bash shell
+
+INSTALLATION
+------------
+make sure that java and javac is in the PATH
+
+tar zxvf dcute.tar.gz
+cd dcute
+./setup
+
+The case studies described in the draft can be executed by running
+
+./runtests
+
+To invoke the Graphical User Interface for CUTE for Java run
+
+./jcutegui
+
+or
+
+java -classpath jcute.jar cute.Cute
+
+The src/ directory contains a number of examples.  See the script
+runtests to know how to run these examples.
+
+
+USAGE
+-----
+
+jcutec is the instrumentor plus compiler script for distributed Java
+programs under test.
+
+jcute is the script to concolically test the executable of the
+instrumented program under test.
+
+usage: ./jcutec source-directory main-java-file main-java-class -sequential
+    source-directory is the directory containing the sources of the Java program to be tested
+    main-java-file is the name of the Java source file containing the main function
+    main-java-class is the name of the class of the Java source file containing the main function
+
+For example, to compile and instrument the Demo example in the directory src/tests in the package tests
+
+./jcutec src/ src/dtests/DExample1.java dtests.DExample1 -sequential
+
+usage: ./jcute class -i iterations [-?] [-help] [-d depth=0] [-s seed] [-t debug_level=0] [-m mode=0] [-r] [-q] [-p] [-v] [-a] [-n argument=0]
+
+Usage: jcute
+Options include:
+
+-help,-?                displays help information
+-d <decimal integer>    Depth of search. Default is 0, which implies infinite depth
+-s <decimal integer>    Seed for random number generator in case -r option is given. Default is current system time.
+-t <decimal integer>    Various debug information and statistics. Default is 0 (no debug information printed).
+        1 print trace of instrumentation function call's entry and exit.
+        2 print info about instrumented function call inserted for concurrency.
+        4 print input map after reading from disk.
+        8 print history at every history change.
+        16 print symbolic state at every state change.
+        32 print path contraint whenever path constraint is updated.
+        64 print old and new history at the end of execution.
+        128 print old and new input map at the end of the execution.
+        256 print path constraint at the end of the excution.
+        512 print line number executed.
+-m <decimal integer {0,1,2}>
+
+        0 - next path (depends on history),
+        1 - replay last execution,
+        2 - start fresh execution without looking at any history. Default is 0.
+-r                      if -r is specified, inputs are randomly initialized; else, inputs are set to 0. Objects are initialized to null in either cases.
+-p                      Random search strategy is invoked
+-q                      Record branch coverage information
+-a                      turn off Optimal Distrubuted Search
+-v                      verbose: logs inputs and trace of execution
+-n <decimal integer>    Pass a single integer argument
+
+For example, to test the Demo example run
+
+./jcute dtests.DExample1 -i 100 -q
+
+To see the statistics about branch coverage and runtime execute
+
+java  -classpath jcute.jar cute.concolic.BranchCoverage
+
+Graphical User Interface
+-------------------------
+
+In the Graphical user Interface, try selecting the directory src/ and the Java program dtests/DExample1.java.
+Then "Compile" and "(Re)start" for testing.
+Click on a Run # to get Input and Trace log.
+
+
+TECHNICAL SUPPORT
+-------------------------
+
+Contact Koushik Sen (ksen@cs.uiuc.edu)
+

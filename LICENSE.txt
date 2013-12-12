@@ -1,0 +1,64 @@
+Unless otherwise noted, the files which comprise jCUTE are subject to
+the following restrictions.
+ 
+The jCUTE software is NOT in the public domain.  However, it is freely
+available without fee for education, research, and non-profit
+purposes.  By obtaining copies of this and other files that comprise
+jCUTE, you, the Licensee, agree to abide by the following conditions
+and understandings with respect to the copyrighted software:
+
+1.  The software is copyrighted in the name of the Board of Trustees
+    of the University of Illinois (UI), and ownership of the software
+    remains with the UI.
+
+2.  Permission to use, copy, and modify this software and its
+    documentation for education, research, and non-profit purposes is
+    hereby granted to the Licensee, provided that the copyright
+    notice, the original author's names and unit identification, and
+    this permission notice appear on all such copies, and that no
+    charge be made for such copies.  Any entity desiring permission to
+    incorporate this software into commercial products should contact:
+
+         Professor Gul A. Agha                 agha@cs.illinois.edu
+         University of Illinois
+         Department of Computer Science
+         Siebel Center for Computer Science
+         Urbana, Illinois  61801
+         USA
+
+3.  Licensee may not use the name, logo, or any other symbol of the UI
+    nor the names of any of its employees nor any adaptation thereof
+    in advertising or publicity pertaining to the software without
+    specific prior written approval of the UI.
+
+4.  THE UI MAKES NO REPRESENTATIONS ABOUT THE SUITABILITY OF THE
+    SOFTWARE FOR ANY PURPOSE.  IT IS PROVIDED "AS IS" WITHOUT EXPRESS
+    OR IMPLIED WARRANTY.
+
+5.  The UI shall not be liable for any damages suffered by Licensee
+    from the use of this software.
+
+6.  The software was developed under agreements between the UI and the
+    Federal Government which entitles the Government to certain
+    rights.
+
+************************************************************************
+
+Developed by: The Open Systems Lab
+              University of Illinois at Urbana-Champaign
+              Department of Computer Science
+              Urbana, IL 61801
+              http://osl.cs.illinois.edu
+
+Contact: http://osl.cs.illinois.edu/software/jcute/
+
+Copyright (c) 2006-2013
+The University of Illinois Board of Trustees.
+     All Rights Reserved.
+
+Principal Investigator:
+     Gul A. Agha (agha@cs.illinois.edu)
+
+Acknowledgments:
+ONR Grant N00014-02-1-0715
+NSF Grant NSF CNS 05-09321

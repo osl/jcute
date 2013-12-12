@@ -1,0 +1,87 @@
+
+cd tmpjcute
+
+export JAVA_LIB_PATH=..
+export LD_LIBRARY_PATH=..
+export PATH=$PATH:..
+
+SOURCE=$1
+
+arch=$(uname)
+if [ $arch != "Linux" ]
+then
+    CLASSPATH="classes;../jcute.jar"
+else
+    CLASSPATH=classes:../jcute.jar
+fi
+
+iter=50000;
+oldarg="";
+arguments="";
+shift 1;
+x="0";
+
+for arg in $@
+do
+  if [ "$oldarg" = "-i" ]
+  then
+    iter=$arg;
+  fi
+  if [ "$x" = "0" ]
+  then
+    x="1";
+  else
+    x="0";
+    if [ "$oldarg" != "-i" ]
+    then
+	arguments="$arguments:$oldarg:$arg";
+    fi
+  fi
+  oldarg=$arg
+done
+if [ "$x" = "1" ]
+then
+	arguments="$arguments:$arg";
+fi
+
+if [ "$PMSG" != "0" ]
+then
+	echo "[Execution Path 1] java $SOURCE $arguments -m 2"
+fi
+
+java -ea -Xmx512m -Xms512m -classpath $CLASSPATH -Djava.library.path=$JAVA_LIB_PATH -Dcute.args="$arguments:-m:2" $SOURCE ;
+ret=$?;
+ret=$((ret&2));
+if [[ ($ret -eq 2) ]]
+then
+	exit
+else
+#        echo "*********************** Input and Trace for Last Execution *****************************"
+#    java -ea -Xmx512m -Xms512m -classpath $CLASSPATH -Djava.library.path=$JAVA_LIB_PATH -Dcute.args="$arguments:-m:1:-t:512" $SOURCE
+#        echo "******************************************************************************"
+	echo -n ""
+fi
+
+i=2
+while [ $i -le $iter ]
+do
+	if [ "$PMSG" != "0" ] 
+	then
+		echo "[Execution Path $i] java $SOURCE $arguments"
+	fi
+
+    java -ea -Xmx512m -Xms512m -classpath $CLASSPATH -Djava.library.path=$JAVA_LIB_PATH -Dcute.args="$arguments" $SOURCE ;
+    ret=$?;
+    ret=$((ret&2));
+	if [[ ($ret -eq 2) ]]
+	then
+		exit
+	else
+#        echo "*********************** Input and Trace for Last Execution *****************************"
+#	    java -ea -Xmx512m -Xms512m -classpath $CLASSPATH -Djava.library.path=$JAVA_LIB_PATH -Dcute.args="$arguments:-m:1:-t:512" $SOURCE
+#        echo "******************************************************************************"
+		echo -n ""
+	fi
+i=$((i+1))
+done
+
