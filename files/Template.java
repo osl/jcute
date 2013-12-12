@@ -45,5 +45,9 @@ public class $Template$ extends TestCase implements cute.Input {
     public Object Object(String type) {
         return input[i++];
     }
+    
+    public Object ObjectShallow(String type) {
+        return input[i++];
+    }
 
 }
