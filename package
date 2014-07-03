@@ -24,7 +24,7 @@ dos2unix tmp/$CUTE/clean
 chmod +x tmp/$CUTE/clean
 dos2unix tmp/$CUTE/$CUTE.test
 chmod +x tmp/$CUTE/$CUTE.test
-cp README.$CUTE tmp/$CUTE/README
+cp README.md tmp/$CUTE/README
 cp LICENSE* tmp/$CUTE/
 cp jcute.jar tmp/$CUTE/
 cp 3rdparty/lpsolve51.dll tmp/$CUTE/
